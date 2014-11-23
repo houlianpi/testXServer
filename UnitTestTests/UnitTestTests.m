@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#define HC_SHORTHAND
+#import <OCHamcrest/OCHamcrest.h>
+
+#define MOCKITO_SHORTHAND
+#import <OCMockito/OCMockito.h>
 
 @interface UnitTestTests : XCTestCase
 
@@ -28,12 +33,23 @@
 - (void)testExample {
     // This is an example of a functional test case.
     XCTAssert(YES, @"Pass");
+    // mock creation
+    NSMutableArray *mockArray = mock([NSMutableArray class]);
+    
+    // using mock object
+    [mockArray addObject:@"one"];
+    [mockArray removeAllObjects];
+    
+    // verification
+    [verify(mockArray) addObject:@"two"];
+    [verify(mockArray) removeAllObjects];
 }
 
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
     [self measureBlock:^{
         // Put the code you want to measure the time of here.
+        NSLog(@"test");
     }];
 }
 
